@@ -1,0 +1,25 @@
+autocmd vimenter * NERDTree
+
+set mouse=a
+syntax on
+filetype plugin indent on
+let g:airline#extensions#tabline#enabled = 1
+
+" Buffer navigation mapping
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>
+
+
+" Go development configuration
+let g:go_metalinter_command = "golangci-lint"
+let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'misspell', 'deadcode', 'varcheck']
+
+" Build and run tests on save.
+augroup auto_go
+	autocmd!
+	autocmd BufWritePost *.go :GoBuild
+	autocmd BufWritePost *.go :GoMetaLinter
+	autocmd BufWritePost *_test.go :GoTest
+	autocmd BufWritePost *_test.go :GoMetaLinter
+augroup end
