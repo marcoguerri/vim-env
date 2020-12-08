@@ -14,7 +14,8 @@ RUN pacman -Syu --noconfirm \
     	go \
    	gopls \
 	tar  \
-	gcc
+	gcc \
+	docker-compose
 
 USER dev
 

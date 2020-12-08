@@ -13,7 +13,9 @@ map gd :bd<cr>
 
 " Go development configuration
 let g:go_metalinter_command = "golangci-lint"
-let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'misspell', 'deadcode', 'varcheck']
+let g:go_metalinter_enabled = ['vet', 'golint', 'misspell', 'deadcode', 'varcheck', 'structcheck']
+" go_debug is useful if commands executed do not match expectations
+" let g:go_debug=['shell-commands']
 
 " Build and run tests on save.
 augroup auto_go

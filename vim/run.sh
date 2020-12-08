@@ -2,4 +2,5 @@
 
 [[ $(whoami) != "root" ]] && echo "Please run this script as root" && exit 1
 
-docker run --net=host -it vimdev /bin/bash
+echo "Bind mounting ${GOPATH}..."
+docker run --net=host -v ${GOPATH}:/home/dev/gopath -it vimdev /bin/bash
