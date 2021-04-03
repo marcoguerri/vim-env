@@ -13,6 +13,6 @@ Supported languages:
 * Autocompletion: `<C-x><C-o>`
 * Buffers tab: `<C-b>`
 * File search tab (CtrlP): `<C-p>`
-* Jump to definition: Ctrl + Left click* Jump to definition: Ctrl + Left click* Jump to definition: Ctrl + Left click
+* Jump to definition: `Ctrl + Left` 
 * Jump to previous focus: `<C-o>`
 * Find referrers to the current symbol: `<C-r>` (Golang)
