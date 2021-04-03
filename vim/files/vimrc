@@ -1,21 +1,27 @@
 autocmd vimenter * NERDTree
 
+set number
 set mouse=a
+set completeopt=longest,menuone
+set noshowmode
+set ttymouse=xterm2
+
+
+
+
 syntax on
 filetype plugin indent on
 let g:airline#extensions#tabline#enabled = 1
 
 " Buffer navigation mapping
-map gn :bn<cr>
-map gp :bp<cr>
-map gd :bd<cr>
+map bn :bn<cr>
+map bp :bp<cr>
+map bd :bd<cr>
 
 
 " Go development configuration
 let g:go_metalinter_command = "golangci-lint"
-let g:go_metalinter_enabled = ['vet', 'golint', 'misspell', 'deadcode', 'varcheck', 'structcheck']
-" go_debug is useful if commands executed do not match expectations
-" let g:go_debug=['shell-commands']
+let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'misspell', 'deadcode', 'varcheck']
 
 " Build and run tests on save.
 augroup auto_go
@@ -25,3 +31,13 @@ augroup auto_go
 	autocmd BufWritePost *_test.go :GoTest
 	autocmd BufWritePost *_test.go :GoMetaLinter
 augroup end
+
+
+" Ctrl-P bindings
+nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+
+" go-vim bindings
+nnoremap <silent> <C-r> :GoReferrers<CR>
+
+" Status line
+set statusline=%t
