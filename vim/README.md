@@ -1,7 +1,6 @@
 Container implementing an environment for vim editor supporting the following plugins:
 
-* vim-go
-	* golangci-lint
+* vim-go (with golangci-lint)
 * ctrlp
 * nerdtree
 * vim-airline
