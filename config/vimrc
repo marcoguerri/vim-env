@@ -1,13 +1,13 @@
 autocmd vimenter * NERDTree
 
+set encoding=utf-8
 set number
 set mouse=a
 set completeopt=longest,menuone
 set noshowmode
 set ttymouse=xterm2
-
-
-
+set tabstop=4
+set expandtab
 
 syntax on
 filetype plugin indent on
@@ -41,3 +41,6 @@ nnoremap <silent> <C-r> :GoReferrers<CR>
 
 " Status line
 set statusline=%t
+
+" Show signature help on accepting autocompletion
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')

@@ -1,0 +1,92 @@
+# Dependencies:
+#   xclip, git
+
+# re-evaluate prompt string when rendering them
+setopt promptsubst
+export LANG="en_US.utf8"
+
+
+bindkey "^[^?" backward-kill-word
+# Forward and back
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
+# Enable reverse history search in VI mode.
+bindkey "^R" history-incremental-search-backward
+
+# history configuration (global history, history size)
+HISTSIZE=130000
+SAVEHIST=130000
+HISTFILE=~/.zsh_history
+
+setopt inc_append_history
+setopt share_history
+
+alias copy="xclip -selection c"
+alias history="fc -E -l 1"
+alias ps2="ps axf -eo pid,ppid,tgid,tgid,pgid,comm"
+
+export EDITOR=/usr/bin/vim
+
+# ret val of last command
+ret_val()
+{
+  local stat="$?"
+  if test $stat -ne 0; then
+    # If process exited by a signal, determine name of signal.
+    if test $stat -gt 128; then
+      local signal="$(builtin kill -l $[$stat - 128] 2>/dev/null)"
+      test "$signal" && signal=" ($signal)"
+    fi
+    echo "%{$fg_bold[red]%}[Exit $stat$signal, $time]%{$reset_color%}"
+  else
+    echo "%{$fg_bold[green]%}[Exit $stat, $time]%{$reset_color%}"
+  fi
+}
+
+# git/hg prompt configuration
+autoload -U colors && colors
+
+parse_git_branch() {
+  (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
+}
+
+render_git_branch() {
+  local branch="$(parse_git_branch)"
+  echo "${branch#(refs/heads/|tags/)}"
+}
+
+render_hg_bookmark() {
+  local bookmark=$(hg bookmarks 2> /dev/null | awk '/\*/ { printf $2 }')
+  echo $bookmark
+}
+
+render_scm() {
+  local git=$(render_git_branch)
+  local hg=$(render_hg_bookmark)
+  if [[ ! -z $git ]];
+  then
+    echo "(${git})"
+  fi
+  if [[ ! -z $hg ]];
+  then
+    echo "(${hg})"
+  fi
+}
+
+time='0s'
+# runtime of last command
+function preexec() {
+  timer=${timer:-$SECONDS}
+}
+
+function precmd() {
+  if [ $timer ]; then
+    timer_show=$(($SECONDS - $timer))
+    time="${timer_show}s"
+    unset timer
+  fi
+}
+
+# Note: use %{%} for expressions that should not move the cursor
+PROMPT="%{$fg_bold[yellow]%}vimdev%{$reset_color%} \$(ret_val) %{$fg[blue]%}~\${PWD#$HOME} ~%{$reset_color%} at %{$fg_bold[red]%}%T [%w]%{$reset_color%} \$(render_scm) $ "
+
