@@ -5,7 +5,8 @@ Container implementing an environment for vim editor supporting the following pl
 * nerdtree
 * vim-airline
 
-This is still a basic configuration and it's being worked on.
+Supported languages:
+* Golang
 
 # Basic shortcuts
 
