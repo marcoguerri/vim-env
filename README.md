@@ -17,4 +17,4 @@ Supported languages:
 * File search tab (ctrlp): `<C-p>`
 * Jump to definition: `Ctrl + Left` 
 * Jump to previous focus: `<C-o>`
-* Find referrers to the current symbol: `<C-r>` (Golang)
+* Run code: `<C-r>`

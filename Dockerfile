@@ -47,6 +47,7 @@ RUN cd /home/dev/.vim/pack/plugins/start/ && curl --fail -L https://github.com/n
 RUN install -m 755 -d /home/dev/gopath
 
 ENV GOPATH /home/dev/gopath
+
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.32.1
 
 RUN vim -e +GoInstallBinaries +qa
