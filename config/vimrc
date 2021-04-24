@@ -32,15 +32,41 @@ augroup auto_go
 	autocmd BufWritePost *_test.go :GoMetaLinter
 augroup end
 
+" Show 100 results in Ctrl-P search window without exceeding
+" window size constraints.
+let g:ctrlp_match_window = 'results:100'
+
 
 " Ctrl-P bindings
 nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+nnoremap <silent> <C-t> :CtrlPTag<CR>
 
-" go-vim bindings
-nnoremap <silent> <C-r> :GoReferrers<CR>
+" Commond bindins 
+autocmd FileType go nnoremap <silent> <C-r> :GoRun<CR>
+autocmd FileType rust nnoremap <silent> <C-r> :RustRun<CR>
+
+autocmd FileType go nnoremap <silent> <C-t> :GoTest<CR>
+autocmd FileType rust nnoremap <silent> <C-t> :RustTest<CR>
 
 " Status line
 set statusline=%t
 
+" Syntastic statusline
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Syntastic configuration
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Show signature help on accepting autocompletion
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" Rust configuration
+let g:rustfmt_autosave = 1
