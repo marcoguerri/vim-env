@@ -4,11 +4,15 @@ Container implementing an environment for vim editor supporting the following pl
 * nerdtree
 * vim-airline
 * coc
+* vim-gutentags
+* targbar
 
 Supported languages:
 * Golang (`vim-go`)
     * Autocompletion via `coc-go`
     * `golangci-lint`
+
+* Rust (`rust.vim`)
 
 
 # Basic shortcuts
