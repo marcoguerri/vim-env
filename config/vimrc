@@ -43,10 +43,11 @@ nnoremap <silent> <C-t> :CtrlPTag<CR>
 
 " Commond bindins 
 autocmd FileType go nnoremap <silent> <C-r> :GoRun<CR>
-autocmd FileType rust nnoremap <silent> <C-r> :RustRun<CR>
+autocmd FileType rust nnoremap <silent> <C-r> :Crun<CR>
 
 autocmd FileType go nnoremap <silent> <C-t> :GoTest<CR>
-autocmd FileType rust nnoremap <silent> <C-t> :RustTest<CR>
+autocmd FileType rust nnoremap <silent> <C-t> :Ctest<CR>
+
 
 " Status line
 set statusline=%t
@@ -70,3 +71,4 @@ nmap <F8> :TagbarToggle<CR>
 
 " Rust configuration
 let g:rustfmt_autosave = 1
+let g:cargo_shell_command_runner = '!'
